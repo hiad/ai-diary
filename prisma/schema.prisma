@@ -1,0 +1,51 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  clearkId String       @unique
+  email    String       @unique
+  entries  DiaryEntry[]
+}
+
+model DiaryEntry {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  title    String
+  content  String
+  analysis Analysis?
+
+  @@unique([userId])
+}
+
+model Analysis {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  entryId String
+  entry   DiaryEntry @relation(fields: [entryId], references: [id])
+
+  mood     String
+  summary  String
+  color    String
+  negative Boolean
+
+  @@unique([entryId])
+}
