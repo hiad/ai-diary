@@ -14,9 +14,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  clerkId String       @unique
-  email   String       @unique
-  entries DiaryEntry[]
+  clerkId  String       @unique
+  email    String       @unique
+  entries  DiaryEntry[]
+  Analysis Analysis[]
 }
 
 model DiaryEntry {
@@ -27,11 +28,10 @@ model DiaryEntry {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  title    String
   content  String
   analysis Analysis?
 
-  @@unique([userId])
+  @@unique([userId, id])
 }
 
 model Analysis {
@@ -42,10 +42,15 @@ model Analysis {
   entryId String
   entry   DiaryEntry @relation(fields: [entryId], references: [id])
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   mood     String
   summary  String
   color    String
   negative Boolean
+  subject  String
 
   @@unique([entryId])
+  @@index([userId])
 }
