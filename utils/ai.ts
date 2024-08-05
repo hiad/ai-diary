@@ -2,7 +2,6 @@ import { zResponse } from "@/app/zod-schemas/schemas";
 import OpenAI from "./openai";
 import { generateObject } from "ai";
 import { z } from "zod";
-import { DiaryEntryWithAnalysis } from "@/types";
 
 type AnalyzeResponse = z.infer<typeof zResponse>;
 

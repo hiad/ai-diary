@@ -5,6 +5,7 @@ import { FC, PropsWithChildren } from "react";
 const links = [
   { href: "/", label: "Home" },
   { href: "/diary", label: "Diary" },
+  { href: "/history", label: "History" },
 ];
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {

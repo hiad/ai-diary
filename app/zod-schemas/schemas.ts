@@ -14,4 +14,9 @@ export const zResponse = z.object({
     .string()
     .describe("the subject of the diary entry. It's just one word"),
   negative: z.boolean().describe("does the entry have a negative connotation?"),
+  sentimentScore: z
+    .number()
+    .describe(
+      "sentiment of the text and rated on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive."
+    ),
 });

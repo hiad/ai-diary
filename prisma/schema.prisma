@@ -45,11 +45,12 @@ model Analysis {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  mood     String
-  summary  String
-  color    String
-  negative Boolean
-  subject  String
+  mood           String
+  summary        String
+  color          String
+  negative       Boolean
+  subject        String
+  sentimentScore Float   @default(0)
 
   @@unique([entryId])
   @@index([userId])
